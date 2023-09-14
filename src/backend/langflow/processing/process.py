@@ -6,11 +6,12 @@ from langflow.interface.run import (
     get_memory_key,
     update_memory_keys,
 )
-from langflow.utils.logger import logger
+from loguru import logger
 from langflow.graph import Graph
 from langchain.chains.base import Chain
 from langchain.vectorstores.base import VectorStore
 from typing import Any, Dict, List, Optional, Tuple, Union
+from langchain.schema import Document
 
 
 def fix_memory_inputs(langchain_object):
@@ -142,6 +143,8 @@ def generate_result(langchain_object: Union[Chain, VectorStore], inputs: dict):
         logger.debug("Generated result and thought")
     elif isinstance(langchain_object, VectorStore):
         result = langchain_object.search(**inputs)
+    elif isinstance(langchain_object, Document):
+        result = langchain_object.dict()
     else:
         raise ValueError(
             f"Unknown langchain_object type: {type(langchain_object).__name__}"

@@ -27,7 +27,7 @@ format:
 	cd src/frontend && npm run format
 
 lint:
-	poetry run mypy --exclude .venv .
+	poetry run mypy src/backend/langflow
 	poetry run black . --check
 	poetry run ruff . --fix
 
@@ -41,10 +41,10 @@ run_frontend:
 	cd src/frontend && npm start
 
 run_cli:
-	poetry run langflow --path src/frontend/build
+	poetry run langflow run --path src/frontend/build
 
 run_cli_debug:
-	poetry run langflow --path src/frontend/build --log-level debug
+	poetry run langflow run --path src/frontend/build --log-level debug
 
 setup_devcontainer:
 	make init
@@ -69,7 +69,7 @@ backend:
 build_and_run:
 	echo 'Removing dist folder'
 	rm -rf dist
-	make build && poetry run pip install dist/*.tar.gz && poetry run langflow
+	make build && poetry run pip install dist/*.tar.gz && poetry run langflow run
 
 build_and_install:
 	echo 'Removing dist folder'

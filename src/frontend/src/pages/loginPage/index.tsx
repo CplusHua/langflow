@@ -32,8 +32,8 @@ export default function LoginPage(): JSX.Element {
 
   function signIn() {
     const user: LoginType = {
-      username: username,
-      password: password,
+      username: username.trim(),
+      password: password.trim(),
     };
     onLogin(user)
       .then((user) => {
@@ -54,7 +54,7 @@ export default function LoginPage(): JSX.Element {
       setTimeout(() => {
         getLoggedUser()
           .then((user) => {
-            const isSuperUser = user.is_superuser;
+            const isSuperUser = user!.is_superuser;
             setIsAdmin(isSuperUser);
             setUserData(user);
           })

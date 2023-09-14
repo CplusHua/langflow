@@ -8,7 +8,7 @@ from pathlib import Path
 
 import yaml
 from pydantic import BaseSettings, root_validator, validator
-from langflow.utils.logger import logger
+from loguru import logger
 
 # BASE_COMPONENTS_PATH = str(Path(__file__).parent / "components")
 BASE_COMPONENTS_PATH = str(Path(__file__).parent.parent.parent / "components")
@@ -40,6 +40,10 @@ class Settings(BaseSettings):
     CACHE: str = "InMemoryCache"
     REMOVE_API_KEYS: bool = False
     COMPONENTS_PATH: List[str] = []
+
+    LANGFUSE_SECRET_KEY: Optional[str] = None
+    LANGFUSE_PUBLIC_KEY: Optional[str] = None
+    LANGFUSE_HOST: Optional[str] = None
 
     @validator("CONFIG_DIR", pre=True, allow_reuse=True)
     def set_langflow_dir(cls, value):

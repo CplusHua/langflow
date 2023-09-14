@@ -233,6 +233,7 @@ export type PaginatorComponentType = {
 export type ConfirmationModalType = {
   title: string;
   titleHeader: string;
+  asChild?: boolean;
   modalContent: string;
   modalContentTitle: string;
   cancelText: string;
@@ -253,12 +254,19 @@ export type UserManagementType = {
   icon: string;
   data?: any;
   index?: number;
+  asChild?: boolean;
   onConfirm: (index, data) => void;
 };
 
 export type loginInputStateType = {
   username: string;
   password: string;
+};
+
+export type patchUserInputStateType = {
+  password: string;
+  cnfPassword: string;
+  gradient: string;
 };
 
 export type UserInputType = {
@@ -548,5 +556,5 @@ export type fetchErrorComponentType = {
 export type dropdownButtonPropsType = {
   firstButtonName: string;
   onFirstBtnClick: () => void;
-  options: Array<{ name: string; onBtnClick: () => void; }>;
+  options: Array<{ name: string; onBtnClick: () => void }>;
 };
